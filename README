@@ -1,0 +1,18 @@
+This is a utility for checking the status of InnReach queues. The script is written in Ruby and makes use of the expect module. It's meant to be executed on the command line. The original purpose was to execute the script as a UserParameter in Zabbix to allow for it to be monitored in near real-time. 
+
+  Usage:
+  check_queue host login pass site [timeout]
+  
+  Required Parameters:
+  
+  host: The Millennium host to connect to
+  
+  login: A username that will open Millennium telnet on host (-h)
+  
+  pass: Password associated with login (-l)
+  
+  site: The sitecode to check
+  
+  Optional Parameters
+  timeout: An optional timeout value in seconds for processing of individual screens. 
+     Default: 5
