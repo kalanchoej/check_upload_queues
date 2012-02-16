@@ -24,10 +24,10 @@ def check_queue(host, login, pass, site, timeout) # TODO: return something usefu
     ssh_out.expect(/Choose one.*M.*/, timeout) { |r| ssh_in.puts "m" }
     ssh_out.expect(/Choose one.*U.*/, timeout) { |r| ssh_in.puts "u" }
     #Process the final screen where our numbers are
-    ssh_out.expect(/Choose one.*A,D,Q/, timeout * 2) do |output|
+    ssh_out.expect(/Get CURRENT data/, timeout * 2) do |output|
       output.each do |line|
         queue = site_pat.match(line)
-        queue ? size = queue[1] : abort("The pattern did not return a value")
+        queue ? size = queue[1] : abort("The pattern did not return a value. Check your site code")
       end
     end
     # Exits the script. TODO: There may be a better way to clean up the connection
