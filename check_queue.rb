@@ -26,8 +26,13 @@ def check_queue(host, login, pass, site, timeout) # TODO: return something usefu
     #Process the final screen where our numbers are
     ssh_out.expect(/Get CURRENT data/, timeout * 2) do |output|
       output.each do |line|
-        queue = site_pat.match(line)
-        queue ? size = queue[1] : abort("The pattern did not return a value. Check your site code")
+        if site == "all"
+          site_pat = %r/6[a-z]{4}[[:cntrl:]]\[\d+;\d+H(\d+)/io
+          size = line.scan(site_pat).flatten!.collect!{|s| s.to_i}.inject(:+)
+        else
+          queue = site_pat.match(line)
+          queue ? size = queue[1] : abort("The pattern did not return a value. Check your site code")
+        end
       end
     end
     # Exits the script. TODO: There may be a better way to clean up the connection
@@ -56,7 +61,7 @@ def help()
   
   pass: Password associated with login
   
-  site: The sitecode to check
+  site: The sitecode to check, or use "all" to return the total (from the first page)
   
   Optional Parameters
   timeout: An optional timeout value in seconds for processing of individual screens. 
@@ -69,4 +74,4 @@ if ARGV.length < 4
   abort("Missing parameters")
 end
 
-puts check_queue(host, login, pass, site, timeout)
+p check_queue(host, login, pass, site, timeout)

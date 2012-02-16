@@ -11,8 +11,7 @@ This is a utility for checking the status of InnReach queues. The script is writ
   
   pass: Password associated with login 
   
-  site: The sitecode to check
-  
+  site: The sitecode to check, or use "all" to return the total (from the first page)  
   Optional Parameters
   timeout: An optional timeout value in seconds for processing of individual screens. 
      Default: 5
