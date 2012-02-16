@@ -42,7 +42,7 @@ end
 def help()
   STDOUT.flush
   STDOUT.puts <<-EOF
-  A ruby utility check the status of upload queues for an InnReach system. This
+  A ruby utility to check the status of upload queues for an InnReach system. This
   script will return an integer
   
   Usage:
@@ -52,9 +52,9 @@ def help()
   
   host: The Millennium host to connect to
   
-  login: A username that will open Millennium telnet on host (-h)
+  login: A username that will open Millennium telnet on host
   
-  pass: Password associated with login (-l)
+  pass: Password associated with login
   
   site: The sitecode to check
   

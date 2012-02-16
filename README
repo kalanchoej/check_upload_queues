@@ -7,9 +7,9 @@ This is a utility for checking the status of InnReach queues. The script is writ
   
   host: The Millennium host to connect to
   
-  login: A username that will open Millennium telnet on host (-h)
+  login: A username that will open Millennium telnet on host
   
-  pass: Password associated with login (-l)
+  pass: Password associated with login 
   
   site: The sitecode to check
   
