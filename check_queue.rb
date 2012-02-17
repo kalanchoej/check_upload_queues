@@ -23,14 +23,14 @@ def check_queue(host, login, pass, site, timeout) # TODO: return something usefu
     ssh_out.expect(/Choose one.*M.*/, timeout) { |r| ssh_in.puts "m" }
     ssh_out.expect(/Choose one.*M.*/, timeout) { |r| ssh_in.puts "m" }
     ssh_out.expect(/Choose one.*U.*/, timeout) { |r| ssh_in.puts "u" }
-    #Process the final screen where our numbers are
+    #Process the final screen where our numbers are. Double timeout value for the long load
     ssh_out.expect(/Get CURRENT data/, timeout * 2) do |output|
-      output = output.to_s
       if site == "all"
         site_pat = %r/6[a-z]{4}[[:cntrl:]]\[\d+;\d+H(\d+)/io
-        size = output.scan(site_pat).flatten!.collect!{|s| s.to_i}.inject(:+)
+        #scan the output then sum the items contained within 2 nested arrays
+        size = output.to_s.scan(site_pat).flatten!.collect!{|s| s.to_i}.inject(:+)
       else
-        queue = site_pat.match(output)
+        queue = site_pat.match(output.to_s)
         queue ? size = queue[1].to_i : abort("The pattern did not return a value. Check your site code")
       end
     end
